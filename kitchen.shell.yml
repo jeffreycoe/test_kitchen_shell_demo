@@ -25,7 +25,7 @@ verifier:
 
 # Define the test suites and what to run to verify the application running in the container
 # Tell test kitchen to use the shell to launch script to verify the application running in the container
-# Should fail with non-zero exit code
+# Will fail with non-zero exit code
 
 # By default, the shell verifier doesn't transfer scripts to the container, so you'd have to specify the commands here
 # There might be a way to transfer the test scripts to the container and just run the scripts in one test suite manually
