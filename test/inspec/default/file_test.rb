@@ -1,4 +1,5 @@
 # Inspec Test
+# Look for inspec resources here: https://www.inspec.io/docs/reference/resources/
 
 test_dir = '/tmp/test_deploy'
 test_file = ::File.join(test_dir, 'test_config.yml')

@@ -28,7 +28,7 @@ verifier:
 
 # Define the test suites and what to run to verify the application running in the container
 # Tell test kitchen to use the shell to launch script to verify the application running in the container
-# Will fail with non-zero exit code
+# Should fail with non-zero exit code
 
 # By default, the shell verifier doesn't transfer scripts to the container, so you'd have to specify the commands here
 # InSpec is probably the better testing framework to use instead as of today
