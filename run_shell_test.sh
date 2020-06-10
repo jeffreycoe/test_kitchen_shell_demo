@@ -24,4 +24,4 @@ echo 'Executing Test Kitchen (Shell)...'
 # Test kitchen will look for a kitchen.yml file by default
 # This isn't required if you just have one kitchen config file
 export KITCHEN_YAML="kitchen.shell.yml"
-kitchen test
+bundle exec kitchen test
