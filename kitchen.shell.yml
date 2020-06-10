@@ -22,9 +22,6 @@ platforms:
 verifier:
   name: shell
   remote_exec: true
-  env_vars:
-    TEST_DIR: '/tmp/test_deploy'
-    TEST_FILE: '/tmp/test_deploy/test_config.yml'
 
 # Define the test suites and what to run to verify the application running in the container
 # Tell test kitchen to use the shell to launch script to verify the application running in the container
@@ -39,13 +36,23 @@ verifier:
 # InSpec is probably easier either way regardless
 suites:
   - name: shell_dir_test
-    command: |
-      if [[ ! -d $TEST_DIR ]]; then
-        exit 1
-      fi
+    verifier:
+      command: |
+        echo 'Verifying directory exists...'
+        if [[ ! -d /tmp/test_deploy ]]; then
+          echo "Directory does not exist!"
+          exit 1
+        else
+          echo 'Directory exists!'
+        fi
   - name: shell_file_test
-    command: |
-      if [[ ! -f $TEST_FILE ]]; then
-        exit 1
-      fi
+    verifier:
+      command: |
+        echo 'Verifying file exists...'
+        if [[ ! -f /tmp/test_deploy/test_config.yml ]]; then
+          echo "File does not exist!"
+          exit 1
+        else
+          echo 'File exists!'
+        fi
 
