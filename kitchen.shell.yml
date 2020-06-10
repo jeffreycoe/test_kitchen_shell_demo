@@ -1,0 +1,51 @@
+# Driver creates the container and tells test kitchen to use the kitchen-docker driver
+driver:
+  name: docker
+
+# Uses the exec provisioner and runs script to deploy the software within container
+provisioner:
+  name: shell
+  script:    'deploy/create_file.sh'
+  root_path: '/tmp'
+
+# Tells test kitchen to use the kitchen-docker transport to talk to the docker container
+transport:
+  name: docker
+
+# Define the platform and the container image
+platforms:
+  - name: centos
+    driver_config:
+      image: centos:7
+      platform: centos
+ 
+verifier:
+  name: shell
+  remote_exec: true
+  env_vars:
+    TEST_DIR: '/tmp/test_deploy'
+    TEST_FILE: '/tmp/test_deploy/test_config.yml'
+
+# Define the test suites and what to run to verify the application running in the container
+# Tell test kitchen to use the shell to launch script to verify the application running in the container
+# Will fail with non-zero exit code
+
+# By default, the shell verifier doesn't transfer scripts to the container, so you'd have to specify the commands here
+# InSpec is probably the better testing framework to use instead as of today
+# See GitHub PR here: https://github.com/test-kitchen/test-kitchen/pull/1382
+
+# There might be a way to transfer the test scripts to the container
+# and just run the scripts in one test suite manually
+# InSpec is probably easier either way regardless
+suites:
+  - name: shell_dir_test
+    command: |
+      if [[ ! -d $TEST_DIR ]]; then
+        exit 1
+      fi
+  - name: shell_file_test
+    command: |
+      if [[ ! -f $TEST_FILE ]]; then
+        exit 1
+      fi
+

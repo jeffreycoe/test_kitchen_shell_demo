@@ -1,0 +1,32 @@
+# Driver creates the container and tells test kitchen to use the kitchen-docker driver
+driver:
+  name: docker
+
+# Uses the exec provisioner and runs script to deploy the software within container
+provisioner:
+  name: shell
+  script:    'deploy/create_file.sh'
+  root_path: '/tmp'
+
+# Tells test kitchen to use the kitchen-docker transport to talk to the docker container
+transport:
+  name: docker
+
+# Define the platform and the container image
+platforms:
+  - name: centos
+    driver_config:
+      image: centos:7
+      platform: centos
+ 
+verifier:
+  name: inspec
+  
+# Define the test suites and what to run to verify the application running in the container
+# Tell test kitchen launch inspec tests and define the 
+# Will fail with non-zero exit code
+suites:
+  - name: inspec_default
+    verifier:
+      inspec_tests:
+        - test/inspec/default
