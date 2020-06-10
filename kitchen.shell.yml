@@ -2,7 +2,7 @@
 driver:
   name: docker
 
-# Uses the exec provisioner and runs script to deploy the software within container
+# Uses the shell provisioner and runs script to deploy the software within container
 provisioner:
   name: shell
   script:    'deploy/create_file.sh'
