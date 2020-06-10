@@ -28,12 +28,9 @@ verifier:
 # Should fail with non-zero exit code
 
 # By default, the shell verifier doesn't transfer scripts to the container, so you'd have to specify the commands here
+# There might be a way to transfer the test scripts to the container and just run the scripts in one test suite manually
 # As of today, InSpec is probably the better testing framework to use instead
 # See GitHub PR here: https://github.com/test-kitchen/test-kitchen/pull/1382
-
-# There might be a way to transfer the test scripts to the container
-# and just run the scripts in one test suite manually
-# InSpec is probably easier either way regardless
 suites:
   - name: shell_dir_test
     verifier:
